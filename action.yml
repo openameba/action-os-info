@@ -1,0 +1,25 @@
+name: get OS info
+description: output OS info
+
+outputs:
+  version:
+    description: OS version
+    value: ${{ steps.os-version.outputs.value }}
+
+runs:
+  using: composite
+  steps:
+    - id: os-version
+      shell: bash
+      run: |
+        case "$RUNNER_OS" in
+          Windows)
+            echo "value=$(systeminfo | awk '/^OS Version:/ { print $3 }')" | tee -a "$GITHUB_OUTPUT"
+            ;;
+          macOS)
+            echo "value=$(sw_vers --productVersion)" | tee -a "$GITHUB_OUTPUT"
+            ;;
+          Linux)
+            echo "value=$(lsb_release -r | awk '/Release:/ { print $2 }')" | tee -a "$GITHUB_OUTPUT"
+            ;;
+        esac
