@@ -1,4 +1,4 @@
-name: tagging
+name: release
 
 on:
   push:
