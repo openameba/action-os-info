@@ -7,6 +7,6 @@ get OS info for GitHub Actions
 ```yaml
 steps:
   - id: os-info
-    uses: openameba/action-os-info@v1
+    uses: openameba/action-os-info@v1.0.0
   - run: echo '${{ steps.os-info.outputs.version }}'
 ```
